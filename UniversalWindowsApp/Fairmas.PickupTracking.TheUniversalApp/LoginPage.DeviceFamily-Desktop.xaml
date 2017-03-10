@@ -1,0 +1,63 @@
+﻿<Page
+    x:Class="Fairmas.PickupTracking.TheUniversalApp.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Fairmas.PickupTracking.TheUniversalApp"
+    xmlns:converters="using:Microsoft.Toolkit.Uwp.UI.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" TrueValue="Visible" FalseValue="Collapsed"/>
+    </Page.Resources>
+
+    <Border Background="White">
+        <Grid x:Name="BaseGrid">
+            <FlyoutBase.AttachedFlyout>
+                <Flyout local:FlyoutHelper.IsOpen="{Binding ShowErrorMessage, Mode=TwoWay}" local:FlyoutHelper.Parent="{Binding ElementName=BaseGrid}">
+                    <Grid Width="300">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{Binding ErrorMessage}" Grid.Row="0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Red" FontSize="16" TextWrapping="Wrap" Padding="40,10"/>
+                    </Grid>
+                </Flyout>
+            </FlyoutBase.AttachedFlyout>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="125"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0">
+                    <Border.Background>
+                        <ImageBrush Stretch="Uniform" ImageSource="Assets/WorldMap.png" AlignmentY="Center" AlignmentX="Center" />
+                    </Border.Background>
+
+                    <Image Source="Assets/WelcomeLogo.png" VerticalAlignment="Top" Margin="100" />
+                </Border>
+                
+                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" Margin="50,0">
+                    <TextBox PlaceholderText="USERNAME" Text="{Binding Username, Mode=TwoWay}" FontSize="20" BorderBrush="DarkGray" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="20,10" Height="50"/>
+                    <TextBox PlaceholderText="PASSWORD" Text="{Binding Password, Mode=TwoWay}" FontSize="20" BorderBrush="DarkGray" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="20,10" Height="50"/>
+                    <Button Content="Login" Command="{Binding LoginCommand}" CommandParameter="{Binding}" Foreground="Green" BorderBrush="LightGreen" Background="LightGreen" Height="50" HorizontalAlignment="Stretch" Margin="120,30"/>
+                    <TextBlock Visibility="{Binding LoginFailed, Converter={StaticResource BoolToVisibilityConverter}}" Text="Sorry, we couldn't log you in. Maybe a typo in the username or password? Try again, we are waiting for you in the app!" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Red" FontSize="18" TextWrapping="Wrap" Padding="40,0"/>
+                </StackPanel>
+            </Grid>
+            
+            <StackPanel Orientation="Vertical" Grid.Row="1" >
+                <TextBlock Text="Fairmas Support" Foreground="DarkRed" HorizontalAlignment="Center" Margin="20"/>
+                <TextBlock Text="(C) 2016 Fairmas Verwertungs- &amp; Entwicklungsgesellschaft mbH" TextWrapping="Wrap" Foreground="LightGray" HorizontalAlignment="Center" />
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</Page>

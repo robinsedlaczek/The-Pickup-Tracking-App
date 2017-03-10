@@ -1,0 +1,11 @@
+An Introduction to Xamarin.Forms
+https://developer.xamarin.com/guides/xamarin-forms/getting-started/introduction-to-xamarin-forms/
+
+Basic Navigation (Hierarchical Navigation)
+https://developer.xamarin.com/samples/xamarin-forms/Navigation/Hierarchical/
+
+Login only once (LoginFlow)
+https://developer.xamarin.com/samples/xamarin-forms/Navigation/LoginFlow/
+
+Xaml Basic
+https://developer.xamarin.com/guides/xamarin-forms/xaml/xaml-basics/getting_started_with_xaml/

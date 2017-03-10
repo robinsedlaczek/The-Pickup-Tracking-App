@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fairmas.PickupTracking.TheApp.Views.MonthlyPickupSummaryPage"
+             xmlns:converters="clr-namespace:Fairmas.PickupTracking.TheApp.Converters;assembly=Fairmas.PickupTracking.TheApp">
+
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <converters:DateTimeToMonthConverter x:Key="DateTimeToMonthConverter"/>
+
+      <Style x:Key="dateHeader" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+      </Style>
+      <Style x:Key="dateField" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        <Setter Property="FontSize" Value="10"/>
+      </Style>
+
+      <Style x:Key="dataHeader" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+      </Style>
+
+      <Style x:Key="dataField" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+      </Style>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  <StackLayout Orientation="Vertical">
+    
+
+    <Grid x:Name="HeaderGrid">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="0"/>
+        <ColumnDefinition Width="30*"/>
+        <ColumnDefinition Width="25*"/>
+        <ColumnDefinition Width="30*"/>
+        <ColumnDefinition Width="45*"/>
+        <ColumnDefinition Width="20*"/>
+        <ColumnDefinition Width="30*"/>
+        <ColumnDefinition Width="40*"/>
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="50" />
+        <RowDefinition Height="20" />
+      </Grid.RowDefinitions>
+
+      <DatePicker VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Date="{Binding SettingsViewModel.ReportDate}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4">
+        <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+      </DatePicker>
+
+      <DatePicker VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Date="{Binding SettingsViewModel.PickupDate}" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="3">
+        <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+      </DatePicker>
+
+      <Label Text="Date"
+             Grid.Row="1" Grid.Column="0" Style="{StaticResource dateHeader}"/>
+      <Label Text="Occ%"
+               Grid.Row="1" Grid.Column="1" Style="{StaticResource dataHeader}"/>
+      <Label Text="RN"
+               Grid.Row="1" Grid.Column="2" Style="{StaticResource dataHeader}"/>
+      <Label Text="ADR"
+               Grid.Row="1" Grid.Column="3" Style="{StaticResource dataHeader}"/>
+      <Label Text="Rev"
+               Grid.Row="1" Grid.Column="4" Style="{StaticResource dataHeader}"/>
+      <Label Text="RN"
+               Grid.Row="1" Grid.Column="5" Style="{StaticResource dataHeader}"/>
+      <Label Text="ADR"
+               Grid.Row="1" Grid.Column="6" Style="{StaticResource dataHeader}"/>
+      <Label Text="Rev"
+               Grid.Row="1" Grid.Column="7" Style="{StaticResource dataHeader}"/>
+    </Grid>
+
+    <ListView x:Name="DataList"  SelectedItem="{Binding SelectedMonth, Mode=TwoWay}">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <ViewCell.View>
+              <StackLayout Orientation="Vertical">
+                <Label Text="{Binding BusinessDate, Converter={StaticResource DateTimeToMonthConverter}}"  Style="{StaticResource dateField}"/>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="45*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="40*"/>
+                  </Grid.ColumnDefinitions>
+
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                  </Grid.RowDefinitions>
+
+                  <Label Text="{Binding Occ}" Style="{StaticResource dataField}" Grid.Row="0" Grid.Column="0" />
+                  <Label Text="{Binding RN}" Style="{StaticResource dataField}" Grid.Row="0" Grid.Column="1" />
+                  <Label Text="{Binding ADR}" Style="{StaticResource dataField}" Grid.Row="0" Grid.Column="2" />
+                  <Label Text="{Binding Rev}" Style="{StaticResource dataField}" Grid.Row="0" Grid.Column="3" />
+                  <Label Text="{Binding PURN}" Style="{StaticResource dataField}" Grid.Row="0" Grid.Column="4" />
+                  <Label Text="{Binding PUADR}" Style="{StaticResource dataField}" Grid.Row="0" Grid.Column="5" />
+                  <Label Text="{Binding PURev}" Style="{StaticResource dataField}" Grid.Row="0" Grid.Column="6" />
+                </Grid>
+              </StackLayout>
+            </ViewCell.View>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+
+  </StackLayout>
+</ContentPage>

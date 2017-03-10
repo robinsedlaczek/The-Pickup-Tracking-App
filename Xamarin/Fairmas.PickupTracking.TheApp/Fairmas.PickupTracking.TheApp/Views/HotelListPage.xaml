@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fairmas.PickupTracking.TheApp.Views.HotelListPage">
+
+  
+  <StackLayout>
+    <Label Text="Hotel Overview" VerticalOptions="Center" HorizontalOptions="Center" FontSize="20" />
+  </StackLayout>
+  
+  <ListView x:Name="PropertyListView" SelectedItem="{Binding SelectedHotel, Mode=TwoWay}">
+   <ListView.ItemTemplate>
+     <DataTemplate>
+       <ViewCell>
+         <ViewCell.View>
+           <StackLayout Orientation="Horizontal">
+             <Label Text="{Binding Name}"></Label>
+             <Label Text=" - "></Label>
+             <Label Text="{Binding City}"></Label>
+             
+           </StackLayout>
+         </ViewCell.View>
+       </ViewCell>
+     </DataTemplate>
+   </ListView.ItemTemplate>
+  </ListView>
+  
+</ContentPage>

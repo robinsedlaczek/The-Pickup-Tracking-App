@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fairmas.PickupTracking.TheApp.Views.LoginPage"
+             xmlns:converters="clr-namespace:Fairmas.PickupTracking.TheApp.Converters;assembly=Fairmas.PickupTracking.TheApp">
+
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <converters:InvertBoolConverter x:Key="InvertBoolConverter"/>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+
+  <StackLayout Spacing="20">
+    
+    <Label Text="Welcome to Pickup Tracking App" FontSize="20" HorizontalTextAlignment="Center"></Label>
+    
+    <Entry Placeholder="Username" Text="{Binding Username}" IsEnabled="{Binding LoggingIn, Converter={StaticResource InvertBoolConverter}}" HorizontalTextAlignment="Center" ></Entry>
+    <Entry Placeholder="Password" Text="{Binding Password}" IsEnabled="{Binding LoggingIn, Converter={StaticResource InvertBoolConverter}}" HorizontalTextAlignment="Center" IsPassword="True"></Entry>
+    
+    <Button Text="Login" Command="{Binding LoginCommand}" CommandParameter="{Binding .}" IsVisible="{Binding LoggingIn, Converter={StaticResource InvertBoolConverter}}"></Button>
+    <ActivityIndicator x:Name="ActivityIndicator" IsRunning="true" IsVisible="{Binding LoggingIn}"></ActivityIndicator>
+
+    <Label IsVisible="{Binding LoginFailed}"  Text="Login Error."  HorizontalTextAlignment="Center" TextColor="Red" FontSize="18"/>
+
+    <Label Text="Contact Fairmas Support" TextColor="Red"  HorizontalTextAlignment="Center"/>
+    <Label Text="(C) 2017 Fairmas Verwertungs- &amp; Entwicklungsgesellschaft mbH" TextColor="Gray"  HorizontalTextAlignment="Center"/>
+    
+  </StackLayout>
+</ContentPage>

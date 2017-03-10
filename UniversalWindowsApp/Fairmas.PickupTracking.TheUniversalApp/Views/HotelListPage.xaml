@@ -1,0 +1,92 @@
+﻿<Page
+    x:Class="Fairmas.PickupTracking.TheUniversalApp.Views.HotelListPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Fairmas.PickupTracking.TheUniversalApp"
+    xmlns:helper="using:Fairmas.PickupTracking.TheUniversalApp.Helper"
+    xmlns:viewModels="using:Fairmas.PickupTracking.Shared.ViewModels"
+    xmlns:converter="using:Microsoft.Toolkit.Uwp.UI.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    >
+
+    <Page.Resources>
+        <viewModels:HotelListViewModel x:Key="hotelListViewModel"/>
+        <!--<BooleanTovisibilitycon-->
+        <converter:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
+    </Page.Resources>
+
+    <Grid Background="#525252" x:Name="BaseGrid">
+        <FlyoutBase.AttachedFlyout>
+            <Flyout helper:FlyoutHelper2.IsOpen="{Binding ShowErrorMessage, Mode=TwoWay}" helper:FlyoutHelper2.Parent="{Binding ElementName=BaseGrid}">
+                <Grid Width="300">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="{Binding ErrorMessage}" Grid.Row="0" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Red" FontSize="16" TextWrapping="Wrap" Padding="40,10"/>
+                </Grid>
+            </Flyout>
+        </FlyoutBase.AttachedFlyout>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Height="100" x:Name="HeaderGrid" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="../Assets/Logo.png" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0"/>
+        </Grid>
+
+        <Border BorderThickness="2" BorderBrush="#C63943" Grid.Row="1"/>
+
+        <!--<ListView SelectedItem="{Binding SelectedHotel, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource hotelListViewModel}, Path=Hotels}" Grid.Row="2" HorizontalContentAlignment="Stretch">-->
+        <ListView x:Name="PropertyListView" SelectedItem="{Binding SelectedHotel, Mode=TwoWay}" ItemsSource="{Binding Hotels}" Grid.Row="2" HorizontalContentAlignment="Stretch">
+            <ListView.ItemContainerTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition FromHorizontalOffset="100" FromVerticalOffset="0"/>
+                </TransitionCollection>
+            </ListView.ItemContainerTransitions>
+            
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:HotelViewModel"> 
+                    <Grid Background="Transparent" HorizontalAlignment="Stretch" Width="Auto">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border BorderThickness="3" Background="LightGreen" BorderBrush="LightGreen" Grid.Column="0" HorizontalAlignment="Left" Visibility="{x:Bind UpToDate, Converter={StaticResource boolToVisibilityConverter}}"/>
+                        <StackPanel Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="{x:Bind Name}" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="White"/>
+                            <TextBlock Text="{x:Bind City}" Style="{StaticResource BaseTextBlockStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="White"/>
+                        </StackPanel>
+                        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text=">" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                    <Setter Property="Padding" Value="20,2,0,0"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+
+        <TextBlock Text="(C) 2016 Fairmas Verwertungs- &amp; Entwicklungsgesellschaft mbH" TextWrapping="Wrap" Foreground="LightGray" HorizontalAlignment="Center" Grid.Row="3" Padding="8" FontSize="11"/>
+
+    </Grid>
+</Page>
+
+    
